@@ -1,5 +1,5 @@
 <?php
-require_once './functions.php';
+require_once __DIR__ . '/inc/functions.php';
 
 //idをバリデージョンして、通過したものだけ
 if(empty($_GET['id'])){
@@ -40,6 +40,8 @@ $publish = str2html($result['publish']);
 $author = str2html($result['author']);
 $id = str2html($result['id']);
 
+
+
 $html_form = <<<EOD
 <form action="update.php" method="post">
   <p>
@@ -68,4 +70,6 @@ $html_form = <<<EOD
   <button type="submit">送信する</button>
 </form>
 EOD;
+include __DIR__ . '/inc/header.php';
 echo $html_form;
+include __DIR__ . '/inc/footer.php';

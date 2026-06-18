@@ -1,21 +1,8 @@
-<!-- list.php -->
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>書籍一覧</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <header>
-    <h1>書籍データベース</h1>
-  </header>
+<!-- input.php -->
 
   <?php
-  require_once 'functions.php';
+  require_once __DIR__ . '/inc/functions.php';
+  include __DIR__ . '/inc/header.php';
   try {
     //関数の実行
     $dbh = db_open();
@@ -49,7 +36,5 @@
     echo "エラー！: " . str2html($e->getMessage());
     exit;
   }
+  include __DIR__ . '/inc/footer.php';
   ?>
-</body>
-
-</html>
