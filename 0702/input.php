@@ -1,38 +1,32 @@
-<?php
+<?php include __DIR__ . '/inc/header.php'; ?>
+<form action="add.php" method="post">
+  <p>
+    <label for="title">タイトル（必須：200文字まで）：</label>
+    <input type="text" id="title" name="title" required value="テスト書籍名">
+  </p>
+  <p>
+    <label for="isbn">ISBN（13桁までの数字）：</label>
+    <input type="text" id="isbn" name="isbn" value="0123456789012" />
+  </p>
+  <p>
+    <label for="price">定価（6桁までの数字）：</label>
+    <input type="number" id="price" name="price" value="2600" />
+  </p>
+  <p>
+    <label for="publish">出版日：</label>
+    <input type="date" id="publish" name="publish" value="2024-02-28" />
+  </p>
+  <p>
+    <label for="author">著者（80文字まで）：</label>
+    <input type="text" id="author" name="author" value="柏岡" />
+  </p>
+  <input type="hidden" name="token" value="<?php //echo $token; ?>" />
+<!-- buttonの前に置きます。 -->
+<button type="submit">送信する</button>
 
-require_once __DIR__ . '/inc/functions.php';
-include __DIR__ . '/inc/header.php';
-include __DIR__. '/inc/error_check.php';
+</form>
+<p style="text-align: center; margin-top: 20px;">
+  <a href="index.php">リストに戻る</a>
+</p>
 
-try{
-# connect1.php
-//返り値を持ったfunctions.php
-    $dbh = db_open();
-//sql文を作った
-$sql = "INSERT INTO books(id,title,isbn,price,publish,author)
-VALUES (NULL, :title ,:isbn, :price, :publish,:author)";
-//sql文を実行した->返り値は$staementに入った
-$stmt = $dbh->prepare($sql);
-
-//整数型に変換している。なぜ？　-> formから取得する値は、すべて文字列型
- $price = (int) $_POST['price'];
- // bindParam() メソッドを使って、プレースホルダに値をバインドします。
-$price = (int)$_POST['price'];
-$stmt->bindParam(':title', $_POST['title'], PDO::PARAM_STR);
-$stmt->bindParam(':isbn', $_POST['isbn'], PDO::PARAM_STR);
-//ここだけ変換した変数を取得している。
-$stmt->bindParam(':price', $price, PDO::PARAM_INT);
-$stmt->bindParam(':publish', $_POST['publish'], PDO::PARAM_STR);
-$stmt->bindParam(':author', $_POST['author'], PDO::PARAM_STR);
-
-$stmt -> execute();
-echo "データが格納されました。";
-echo '<a href="index.php">リストに戻る</a>';
-var_dump($stmt);
-
-}catch(PDOException $e){
-    echo "エラー! :". str2html($e->getMessage()). "<br>";
-    exit;
-}
-
- include __DIR__ . '/inc/footer.php';
+<?php include __DIR__ . '/inc/footer.php'; ?>

@@ -1,4 +1,5 @@
 <!-- input.php -->
+<?php require_once __DIR__ . '/login_check.php'; ?>
 
   <?php
   require_once __DIR__ . '/inc/functions.php';

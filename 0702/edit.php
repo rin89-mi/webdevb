@@ -1,4 +1,12 @@
+<?php require_once __DIR__ . '/login_check.php';
+session_start(); //いらないかも。
+$token = bin2hex(random_bytes(20));
+$_SESSION['token'] = $token;
+?>
+
+
 <?php
+
 require_once __DIR__ . '/inc/functions.php';
 
 //idをバリデージョンして、通過したものだけ
