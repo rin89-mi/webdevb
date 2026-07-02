@@ -7,6 +7,7 @@ $name = [
    'suzuki' => '鈴木',
    'takahashi' => '高橋',
 ];
+
 echo $name['takahashi'];
 //var_dumpは値を全部表示する
 //var_dump($name);
