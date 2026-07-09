@@ -1,9 +1,9 @@
 <!-- input.php -->
-<?php require_once __DIR__ . '/login_check.php'; ?>
+<?php
+require_once __DIR__ . '/login_check.php';
+require_once __DIR__ . '/inc/functions.php';
+include __DIR__ . '/inc/header.php';
 
-  <?php
-  require_once __DIR__ . '/inc/functions.php';
-  include __DIR__ . '/inc/header.php';
   try {
     //関数の実行
     $dbh = db_open();

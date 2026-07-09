@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/login_check.php'; // ログインチェック※既に設置済み
 require_once __DIR__ . '/token_check.php';
-
 require_once __DIR__ . '/inc/functions.php';
 include __DIR__ . '/inc/error_check.php';
 include __DIR__ . '/inc/header.php';

@@ -1,44 +1,36 @@
 <?php require_once __DIR__ . '/login_check.php';
-session_start(); //いらないかも。
+// session_start(); //いらないかも。
 $token = bin2hex(random_bytes(20));
 $_SESSION['token'] = $token;
 ?>
-
-
 <?php
-
 require_once __DIR__ . '/inc/functions.php';
 
-//idをバリデージョンして、通過したものだけ
-if(empty($_GET['id'])){
-    echo "idを指定してください";
-    exit;
-}
-
-if(!preg_match('/\A\d{1,11}+\z/u', $_GET['id'])) {
-  echo 'idが正しくありません';
+//idをバリデーションして、通過したものだけ
+if (empty($_GET['id'])) {
+  echo "idを指定してください";
   exit;
 }
 
+if (!preg_match('/\A\d{1,11}\z/u', $_GET['id'])) {
+  echo 'idがただしくありません';
+  exit;
+}
 //整数型に変換
 $id = (int) $_GET['id'];
-var_dump($id);
 
 $dbh = db_open();
 
-$sql = "SELECT id, title, isbn,price,publish,author FROM books WHERE id
-= :id";
+$sql = "SELECT id, title, isbn, price, publish, author FROM books WHERE id = :id";
 $stmt = $dbh->prepare($sql);
-//取得したidを使って、データベースに接続
+//取得したidをつかって、データベースに接続
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-if(!$result){
-    echo "指定されたデータはありません";
-    exit;
+if (!$result) {
+  echo "指定されたデータはありません。";
+  exit;
 }
-
-var_dump($result);
 
 //取得したデータをフォームに配置
 $title = str2html($result['title']);
@@ -49,11 +41,10 @@ $author = str2html($result['author']);
 $id = str2html($result['id']);
 
 
-
 $html_form = <<<EOD
 <form action="update.php" method="post">
   <p>
-    <label for="title">書籍名</label>
+    <label for="title">書籍名（必須）</label>
     <input type="text" id="title" name="title" value="$title" required>
   </p>
   <p>
@@ -78,6 +69,14 @@ $html_form = <<<EOD
   <button type="submit">送信する</button>
 </form>
 EOD;
+?>
+
+<?php
 include __DIR__ . '/inc/header.php';
-echo $html_form;
+echo $html_form; ?>
+<p style="text-align: center; margin-top: 20px;">
+  <a href="index.php">リストに戻る</a>
+</p>
+
+<?php
 include __DIR__ . '/inc/footer.php';

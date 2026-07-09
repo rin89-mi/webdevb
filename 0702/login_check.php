@@ -1,9 +1,8 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 if (!isset($_SESSION['login'])) {
-  echo "このページにアクセスするには<a href='login.php'>ログイン</a>が必要です。";
-  exit;
+    header('Location: login.php');
+    exit;
 }
-echo "<!-- ログイン中 -->";
