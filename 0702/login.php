@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once __DIR__ . '/inc/functions.php';
@@ -29,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } elseif (password_verify($_POST['password'], $result['password'])) {
                 session_regenerate_id(true);
                 $_SESSION['login'] = true;
+                // echo 'SESSION_ID=' . session_id();
+                // echo '<br>LOGIN=' . (int) !empty($_SESSION['login']);
                 header('Location: index.php');
                 exit;
             } else {

@@ -27,8 +27,7 @@ $_SESSION['token'] = $token;
     <label for="author">著者（80文字まで）：</label>
     <input type="text" id="author" name="author" value="柏岡" />
   </p>
-  <input type="hidden" name="token" value="<?php //echo $token;
-                                            ?>" />
+  <input type="hidden" name="token" value="<?php echo $token; ?>" />
   <!-- buttonの前に置きます。 -->
   <button type="submit">送信する</button>
 </form>

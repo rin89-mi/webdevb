@@ -1,5 +1,7 @@
 <?php
-
-declare(strict_types=1);
-
-// Authentication guard for logged-in pages.
+// inc/login_check.php
+if (!isset($_SESSION)) { session_start(); }
+if (empty($_SESSION['login'])) {
+  header('Location: login.php');
+  exit;
+}
